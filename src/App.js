@@ -10,12 +10,14 @@ import { BASE_SEPARATOR_REGEX } from "./constants.js";
 class App {
   async run() {
     const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.");
-    const result = this.extractNumbersFromInput(input);
+    const numbers = this.extractNumbersFromInput(input);
+    const result = this.add(numbers);
     Console.print(`결과 : ${result}`);
   }
 
   extractNumbersFromInput(input) {
     if (input === "") return [0];
+
     let expression = input;
     let division = BASE_SEPARATOR_REGEX;
 
@@ -28,6 +30,11 @@ class App {
 
     const numbers = expression.split(division).filter(Boolean).map(Number);
     return numbers;
+  }
+
+  add(numbers) {
+    const sum = numbers.reduce((a, b) => a + b, 0);
+    return sum;
   }
 }
 
