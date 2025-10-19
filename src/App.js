@@ -1,12 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import { BASE_SEPARATOR_REGEX } from "./constants.js";
 import { validateInput, validateNumbers } from "./errors.js";
-import {
-  extractMainNumbers,
-  getCustomPattern,
-  isCustomPattern,
-  setFinalDivision,
-} from "./utils.js";
+import { extractExpression, getCustomPattern, isCustomPattern, setFinalDivision } from "./utils.js";
 
 class App {
   async run() {
@@ -14,7 +9,7 @@ class App {
       const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.");
       validateInput(input);
 
-      const numbers = this.extractNumbersFromInput(input);
+      const numbers = this.parseNumbers(input);
       const result = this.add(numbers);
 
       Console.print(`결과 : ${result}`);
@@ -24,7 +19,7 @@ class App {
     }
   }
 
-  extractNumbersFromInput(input) {
+  parseNumbers(input) {
     if (input === "") return [0];
 
     let expression = input;
@@ -32,7 +27,7 @@ class App {
 
     if (isCustomPattern(input)) {
       const custom = getCustomPattern(input);
-      expression = extractMainNumbers(input);
+      expression = extractExpression(input);
       division = setFinalDivision(custom);
     }
 

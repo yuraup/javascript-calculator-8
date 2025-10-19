@@ -13,7 +13,7 @@ export function getCustomPattern(input) {
 }
 
 /** 커스텀 선언부 제거 및 본문 추출 */
-export function extractMainNumbers(input) {
+export function extractExpression(input) {
   return input.replace(CUSTOM_SEPARATOR_PATTERN, "");
 }
 
